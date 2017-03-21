@@ -1,14 +1,14 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
+var express      = require('express');
+var path         = require('path');
+var favicon      = require('serve-favicon');
+var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-
-var index = require('./routes/index');
-var users = require('./routes/users');
-
-var app = express();
+var bodyParser   = require('body-parser');
+var constants    = require('./config/constants');
+var index        = require('./routes/index');
+var users        = require('./routes/users');
+var admin        = require('./routes/admin');
+var app          = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,8 +22,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Define all global variables
+constants.setGlobals(app)
+
+// Disabe caching 
+// app.set('view cache', false);
+
 app.use('/', index);
 app.use('/users', users);
+app.use('/admin', admin);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
