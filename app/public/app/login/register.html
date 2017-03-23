@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<form class="form-signin" method="post">
+			<h2 class="form-signin-heading">Please sign in</h2>
+			
+			<label for="inputEmail" class="sr-only">Username</label>
+			<input type="text" name="username" ng-model="data.username" id="inputEmail" class="form-control" placeholder="Username">
+			
+			<label for="inputPassword" class="sr-only">Password</label>
+			<input type="password" name="password" ng-model="data.password" id="inputPassword" class="form-control" placeholder="Password">
+
+			<label for="inputRePassword" class="sr-only">Re-enter Password</label>
+			<input type="password" name="repassword" ng-model="data.repassword" id="inputRePassword" class="form-control" placeholder="Re-enter Password">
+
+			<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="register()">Register</button>
+		</form>
+	</div>
+	<div class="col-md-4"></div>
+</div>

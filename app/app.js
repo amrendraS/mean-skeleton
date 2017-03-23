@@ -5,6 +5,7 @@ var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var constants    = require('./config/constants');
+var database     = require('./dbHandler/dbBridge');
 var index        = require('./routes/index');
 var users        = require('./routes/users');
 var admin        = require('./routes/admin');
@@ -25,8 +26,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Define all global variables
 constants.setGlobals(app)
 
-// Disabe caching 
-// app.set('view cache', false);
+// Create database connection
+database.createConnection()
+
+// Create admin for the first time
+setTimeout(function(){ database.createAdmin(); }, 3000)
 
 app.use('/', index);
 app.use('/users', users);

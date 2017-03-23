@@ -1,10 +1,17 @@
-var express = require('express');
-var router = express.Router();
-var postHandler = require("./handler/postsHandler");
+var express      = require('express');
+var router       = express.Router();
+var postsHandler = require("./handler/postsHandler");
+var loginHandler = require("./handler/loginHandler");
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('admin/index', { title: 'Admin | Home' });
+// Register admin API
+router.post('/register', function(req, res, next) {
+	loginHandler.register(req, res);
+});
+
+router.post('/login', function(req, res, next) {
+	console.log(req.body)
+  // res.render('admin/index', { title: 'Admin | Home' });
+  loginHandler.login(req, res);
 });
 
 router.get('/posts', function(req, res, next) {
@@ -12,7 +19,7 @@ router.get('/posts', function(req, res, next) {
 });
 
 router.post('/posts/new', function(req, res, next) {
-	postHandler.newPost(req, res)
+	postsHandler.newPost(req, res)
   // res.render('admin/posts/new_post', { title: 'Admin | New Post' });
 });
 

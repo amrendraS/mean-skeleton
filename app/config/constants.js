@@ -9,4 +9,18 @@ constants.setGlobals = function (app) {
 	}
 }
 
+constants.database = {
+	host: "127.0.0.1",
+	port: "27017",
+	dbName: "amrendrasingh"
+}
+
+// Admin login details
+constants.admin = {
+	fullName: "Amrendra Singh",
+	userName: "amrendra",
+	password: "amrendra",
+	role: 101
+}
+
 module.exports = constants;
