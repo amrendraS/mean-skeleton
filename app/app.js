@@ -9,6 +9,7 @@ var database     = require('./dbHandler/dbBridge');
 var index        = require('./routes/index');
 var users        = require('./routes/users');
 var admin        = require('./routes/admin');
+var posts        = require('./routes/posts');
 var app          = express();
 
 // view engine setup
@@ -35,6 +36,7 @@ setTimeout(function(){ database.createAdmin(); }, 3000)
 app.use('/', index);
 app.use('/users', users);
 app.use('/admin', admin);
+app.use('/posts', posts);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

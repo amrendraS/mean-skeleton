@@ -1,0 +1,27 @@
+<div class="container">
+	
+	<div class="alert alert-success" ng-if="!posts"> <strong>Note:</strong> No posts found! </div>
+	
+	<table class="table table-striped" ng-if="posts">
+	  <thead>
+	    <tr>
+	      <th>#</th>
+	      <th>Title</th>
+	      <th>Description</th>
+	      <th>Author</th>
+	      <th>Action</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr ng-repeat="post in posts">
+	      <th scope="row">1</th>
+	      <td>{{post.title}}</td>
+	      <td>{{post.description}}</td>
+	      <td>{{post.author}}</td>
+	      <td>Edit</td>
+	    </tr>
+	  </tbody>
+  </table>
+
+  <a class="btn btn-primary" href="/#/posts/new">New Post</a>
+</div>
