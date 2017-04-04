@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="Blogger">
+    <head>
+      <title> Amrendra </title>
+      
+      <!-- Include Meta Data -->
+
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta content="width=device-width, initial-scale=1" name="viewport" />
+      <meta content="" name="description" />
+      <meta content="" name="author" />
+      <!-- Include CSS used -->
+      <link rel="stylesheet" href="/stylesheets/style.css">
+			<!-- <link href="/stylesheets/bootstrap.css" rel="stylesheet" type="text/css"> -->
+			<link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+			<link href="/stylesheets/dashboard.css" rel="stylesheet" type="text/css">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+			<!-- Include scripts -->
+			<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+			<script type="text/javascript" src="/javascripts/bootstrap.js" ></script>
+			<script type="text/javascript" src="/javascripts/bootstrap.min.js" ></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+
+			<!-- Load controllers -->
+			<script type="text/javascript" src="app/app.js"></script>
+			<script type="text/javascript" src="app/services/httpService.js"></script>
+			<script type="text/javascript" src="app/login/loginController.js"></script>
+			<script type="text/javascript" src="app/login/registerController.js"></script>
+			<script type="text/javascript" src="app/posts/postsController.js"></script>
+			<script type="text/javascript" src="app/dashboard/HomeController.js"></script>
+    </head>
+
+    <body ng-controller="AppController">
+
+        <div ng-if="isLogin" data-ng-include="'layouts/header.html'" data-ng-controller="HeaderController" class="page-header navbar navbar-fixed-top"> </div>
+        <div class="container">
+        	<div class="starter-template">
+        		<div ng-view></div>
+        	</div>
+        </div>
+
+        <div data-ng-include="'layouts/footer.html'" data-ng-controller="FooterController" class="page-footer"> </div>
+
+    </body>
+</html>

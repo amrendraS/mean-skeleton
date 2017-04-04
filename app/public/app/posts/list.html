@@ -8,17 +8,25 @@
 	      <th>#</th>
 	      <th>Title</th>
 	      <th>Description</th>
+	      <th>Active</th>
 	      <th>Author</th>
 	      <th>Action</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	    <tr ng-repeat="post in posts">
-	      <th scope="row">1</th>
+	      <th scope="row"> {{$index+1}} </th>
 	      <td>{{post.title}}</td>
 	      <td>{{post.description}}</td>
+	      <td ng-if="post.active" > <i class="fa fa-check" aria-hidden="true"> </td>
+	      <td ng-if="!post.active" > <i class="fa fa-ban" aria-hidden="true"> </td>
 	      <td>{{post.author}}</td>
-	      <td>Edit</td>
+	      <td>
+	      	<a href="#/posts/edit/{{post._id}}"> <i class="fa fa-pencil-square-o" aria-hidden="false"></i> </a>
+	      	<a ng-click="delete(post._id)"> <i class="fa fa-trash-o" aria-hidden="false"></i> </a>
+	      	<a ng-if="post.active" ng-click="inactive(post._id)"> <i class="fa fa-ban" aria-hidden="true"></i> </a>
+	      	<a ng-if="!post.active" ng-click="active(post._id)"> <i class="fa fa-check" aria-hidden="true"></i> </a>
+	      </td>
 	    </tr>
 	  </tbody>
   </table>

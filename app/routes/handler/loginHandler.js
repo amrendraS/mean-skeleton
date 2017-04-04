@@ -6,7 +6,7 @@ loginHandler.login = function (req, res) {
 		// return res.json({success: true});
 		adminQuery.getAdmin(req.body, function(err, response){
 			if(response) {
-				return res.json({success: true});
+				return res.json({success: true, res: response});
 			} else {
 				return res.json({success: false, info: "Wrong username or password!"});
 			}
