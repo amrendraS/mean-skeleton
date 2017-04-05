@@ -1,6 +1,7 @@
 Blogger.controller('postsController', ['$scope', 'httpService', '$rootScope', '$location', '$routeParams', function($scope, httpService, $rootScope, $location, $routeParams) {
-    $scope.posts = null;
-    $scope.post  = null;
+    $scope.posts     = null;
+    $scope.post      = {};
+    $scope.post.tags = [];
 
     // Redirect is login not found
     if(!localStorage.getItem('isLogin')){
@@ -27,6 +28,7 @@ Blogger.controller('postsController', ['$scope', 'httpService', '$rootScope', '$
       httpService.post("/posts/getPost", {_id: _id}, function(res){
         if(res.success) {
           $scope.post = res.res.post;
+          $scope.post.tags = !!$scope.post.tags && $scope.post.tags.length > 0 ? $scope.post.tags : [];
         } else {
           alert(res.info);
         }
@@ -34,12 +36,13 @@ Blogger.controller('postsController', ['$scope', 'httpService', '$rootScope', '$
     }
 
     if(!!$routeParams.postId) {
-      $scope.getSinglePost($routeParams.postId)
+      $scope.getSinglePost($routeParams.postId);
     }
 
     // Create new posts
     $scope.new = function(){
       // Validate input keys
+      console.log($scope.post );
       if(!$scope.post || !$scope.post.title || !$scope.post.description) {
         alert('Title and Description is required to process!');
         return false;

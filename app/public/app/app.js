@@ -1,5 +1,6 @@
 var Blogger = angular.module('Blogger', [
-    'ngRoute'
+    'ngRoute',
+    'ngTagsInput'
 ]);
 
 Blogger.controller('AppController', ['$scope', '$rootScope', function ($scope, $rootScope) {
