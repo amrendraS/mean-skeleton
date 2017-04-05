@@ -19,8 +19,8 @@ postsQuery.create = function(data, cb){
 	})
 }
 
-postsQuery.delete = function(_id, cb){
-	dbBridge.db.collection("posts").remove(_id, function(err, res){
+postsQuery.delete = function(query, cb){
+	dbBridge.db.collection("posts").remove(query, function(err, res){
 		cb(err, res);
 	})
 }

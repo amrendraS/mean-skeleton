@@ -89,6 +89,10 @@ Blogger.controller('postsController', ['$scope', 'httpService', '$rootScope', '$
 
     // Delete existing post
     $scope.delete = function(_id){
+      var confirm = window.confirm('Are you sure want to delete?')
+      if(!confirm) {
+        return false;
+      }
       httpService.post("/posts/delete/", {_id: _id}, function(res){
         if(res.success) {
           $scope.getPosts ();

@@ -51,7 +51,6 @@ postHandler.create = function (req, res) {
 
 // Edit a post
 postHandler.edit = function (req, res) {
-	console.log(req.body)
 	if(!req.body.query._id || !req.body.data.title || !req.body.data.description) {
 		return res.json({success: false, info: "Post Id, Title and Description is required!"});
 	}
@@ -68,10 +67,11 @@ postHandler.edit = function (req, res) {
 
 // Delete a post
 postHandler.delete = function (req, res) {
+	console.log(req.body)
 	if(!req.body._id) {
 		return res.json({success: false, info: "Unable to process delete request!"});
 	}
-
+	req.body._id = ObjectID(req.body._id);
 	postsQuery.delete(req.body, function(err, result){
 		if(!err && !! result && result.length){
 			return res.json({success: true, info: "All posts found!", posts: result})
