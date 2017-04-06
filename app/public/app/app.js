@@ -38,6 +38,10 @@ Blogger.config(['$routeProvider', function ($routeProvider) {
     templateUrl:'app/posts/edit.html',
     controller: 'postsController'
   })
+  .when('/tags',{
+    templateUrl:'app/tags/list.html',
+    controller: 'tagsController'
+  })
   .otherwise({
 		redirectTo: '/login',
 	});

@@ -15,6 +15,10 @@ Blogger.controller('postsController', ['$scope', 'httpService', '$rootScope', '$
         if(res.success) {
           $scope.posts = res.res.posts;
           $scope.posts.reverse();
+          for (var i = 0; i < $scope.posts.length; i++) {
+            $scope.posts[i].createdAt = new Date($scope.posts[i].createdAt).toLocaleString();
+            $scope.posts[i].updatedAt = new Date($scope.posts[i].updatedAt).toLocaleString();
+          }
         } else {
           alert(res.info);
         }
@@ -42,7 +46,6 @@ Blogger.controller('postsController', ['$scope', 'httpService', '$rootScope', '$
     // Create new posts
     $scope.new = function(){
       // Validate input keys
-      console.log($scope.post );
       if(!$scope.post || !$scope.post.title || !$scope.post.description) {
         alert('Title and Description is required to process!');
         return false;
