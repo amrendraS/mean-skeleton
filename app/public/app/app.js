@@ -38,6 +38,18 @@ Blogger.config(['$routeProvider', function ($routeProvider) {
     templateUrl:'app/posts/edit.html',
     controller: 'postsController'
   })
+  .when('/categories',{
+    templateUrl:'app/categories/list.html',
+    controller: 'categoriesController'
+  })
+  .when('/categories/new',{
+    templateUrl:'app/categories/new.html',
+    controller: 'categoriesController'
+  })
+  .when('/categories/edit/:categoryId',{
+    templateUrl:'app/categories/edit.html',
+    controller: 'categoriesController'
+  })
   .when('/tags',{
     templateUrl:'app/tags/list.html',
     controller: 'tagsController'
