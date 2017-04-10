@@ -9,26 +9,29 @@
 	      <th>Title</th>
 	      <th>Description</th>
 	      <th>Tags</th>
+	      <th>Categories</th>
 	      <th>Views</th>
 	      <th>Active</th>
 	      <th>Author</th>
-	      <th>Created At</th>
-	      <th>Updated At</th>
+	      <!-- <th>Created At</th>
+	      <th>Updated At</th> -->
 	      <th>Action</th>
 	    </tr>
 	  </thead>
 	  <tbody>
+	  {{post.categories}}
 	    <tr ng-repeat="post in posts">
 	      <th scope="row"> {{$index+1}} </th>
 	      <td>{{post.title}}</td>
 	      <td>{{post.description}}</td>
 	      <td><span ng-repeat="tag in post.tags"> {{tag.text}},  </span></td>
+	      <td><span ng-repeat="category in post.categories"> {{category}},  </span></td>
 	      <td>{{post.views || 0}}</td>
 	      <td ng-if="post.active" > <i class="fa fa-check" aria-hidden="true"> </td>
 	      <td ng-if="!post.active" > <i class="fa fa-ban" aria-hidden="true"> </td>
 	      <td>{{post.author}}</td>
-	      <td>{{post.createdAt}}</td>
-	      <td>{{post.updatedAt}}</td>
+	      <!-- <td>{{post.createdAt}}</td>
+	      <td>{{post.updatedAt}}</td> -->
 	      <td>
 	      	<a href="#/posts/edit/{{post._id}}"> <i class="fa fa-pencil-square-o" aria-hidden="false"></i> </a>
 	      	<a ng-click="delete(post._id)"> <i class="fa fa-trash-o" aria-hidden="false"></i> </a>

@@ -1,9 +1,11 @@
 Blogger.controller('tagsController', ['$scope', 'httpService', '$rootScope', function($scope, httpService, $rootScope) {
 	
+	$scope.tags = null;
+	
 	// Get tags from posts
 	httpService.get("/tags", {}, function(res){
-		console.log('res in controller: ' + JSON.stringify(res))
-    if(res.success) {
+    if(res.success && res.res.tags) {
+    	$scope.tags = res.res.tags;
     } else {
       alert(res.info);
     }

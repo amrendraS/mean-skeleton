@@ -15,6 +15,7 @@ tagsHandler.getTags = function (req, res) {
 					}
 				}
 			}
+			console.log(tags)
 			return res.json({success: true, info: "All tags found!", tags: tags})
 		} else {
 			return res.json({success: true, info: "No posts found!"})
