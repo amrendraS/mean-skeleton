@@ -13,9 +13,7 @@
   <tags-input ng-model="post.tags"></tags-input>
 
   <select class="form-control" ng-model="post.categories" multiple>
-    <option>Mustard</option>
-    <option>Ketchup</option>
-    <option>Relish</option>
+    <option ng-repeat="category in categories" value="{{category._id}}">{{category.name}}</option>
   </select>
   
   <div class="form-group">

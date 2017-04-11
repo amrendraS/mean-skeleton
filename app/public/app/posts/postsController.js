@@ -1,7 +1,8 @@
 Blogger.controller('postsController', ['$scope', 'httpService', '$rootScope', '$location', '$routeParams', function($scope, httpService, $rootScope, $location, $routeParams) {
-    $scope.posts     = null;
-    $scope.post      = {};
-    $scope.post.tags = [];
+    $scope.posts          = null;
+    $scope.post           = {};
+    $scope.post.tags      = [];
+    // $scope.categoriesName = [];
 
     // Redirect is login not found
     if(!localStorage.getItem('isLogin')){
@@ -15,10 +16,29 @@ Blogger.controller('postsController', ['$scope', 'httpService', '$rootScope', '$
         if(res.success) {
           $scope.posts = res.res.posts;
           $scope.posts.reverse();
-          for (var i = 0; i < $scope.posts.length; i++) {
-            $scope.posts[i].createdAt = new Date($scope.posts[i].createdAt).toLocaleString();
-            $scope.posts[i].updatedAt = new Date($scope.posts[i].updatedAt).toLocaleString();
-          }
+          // Get categories for these posts
+          $scope.getCategories(function(categories){
+            for (var i = 0; i < $scope.posts.length; i++) {
+              $scope.posts[i].categoriesName = [];
+              $scope.posts[i].createdAt = new Date($scope.posts[i].createdAt).toLocaleString();
+              $scope.posts[i].updatedAt = new Date($scope.posts[i].updatedAt).toLocaleString();
+
+              // Add categories name for posts
+              if(!!$scope.posts[i].categories && $scope.posts[i].categories.length > 0 ) {
+                for (var j = 0; j < categories.length; j++) {
+                  for (var k = 0; k < $scope.posts[i].categories.length; k++) {
+                    if($scope.posts[i].categories[k] === categories[j]._id) { // If category id matched for this post
+                      $scope.posts[i].categoriesName.push(categories[j].name);
+                    }
+                  }
+                }
+              } else {
+                console.log('This post doesnt have categories!')
+              }
+
+            }
+          });
+          
         } else {
           alert(res.info);
         }
@@ -26,6 +46,21 @@ Blogger.controller('postsController', ['$scope', 'httpService', '$rootScope', '$
     }
 
     $scope.getPosts ();
+
+    // Get categories for edit and add post
+    $scope.getCategories = function(cb) {
+      httpService.get("/categories", {}, function(res){
+        if(res.success) {
+          $scope.categories = res.res.category;
+          $scope.categories.reverse();
+          cb($scope.categories)
+        } else {
+          cb(res.info);
+        }
+      });
+    }
+
+    $scope.getCategories(function(categories) {});
 
     // Get post from URL id
     $scope.getSinglePost = function(_id) {
@@ -45,9 +80,10 @@ Blogger.controller('postsController', ['$scope', 'httpService', '$rootScope', '$
 
     // Create new posts
     $scope.new = function(){
+      console.log(JSON.stringify($scope.post))
       // Validate input keys
-      if(!$scope.post || !$scope.post.title || !$scope.post.description) {
-        alert('Title and Description is required to process!');
+      if(!$scope.post || !$scope.post.title || !$scope.post.description || (!!$scope.post.tags && $scope.post.tags.length <= 0) || (!!$scope.post.categories && $scope.post.categories.length <= 0)) {
+        alert('Title, description, tags and categories are required to process!');
         return false;
       }
 
