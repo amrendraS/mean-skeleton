@@ -54,10 +54,6 @@ Blogger.config(['$routeProvider', function ($routeProvider) {
     templateUrl:'app/tags/list.html',
     controller: 'tagsController'
   })
-  .when('/blog',{
-    templateUrl:'app/blog/index.html',
-    controller: 'blogController'
-  })
   .otherwise({
 		redirectTo: '/login',
 	});
