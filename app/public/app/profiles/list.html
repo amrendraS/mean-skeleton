@@ -1,0 +1,33 @@
+<div class="container">
+	
+	<div class="alert alert-success" ng-if="!profile"> <strong>Note:</strong> No profile found! </div>
+	
+	<table class="table table-striped" ng-if="profile">
+	  <thead>
+	    <tr>
+	      <th>#</th>
+	      <th>Name</th>
+	      <th>username</th>
+	      <th>Active</th>
+	      <th>Action</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr ng-repeat="profile in profiles">
+	      <th scope="row"> {{$index+1}} </th>
+	      <td>{{profile.name}}</td>
+	      <td>{{profile.username}}</td>
+	      <td ng-if="profile.active" > <i class="fa fa-check" aria-hidden="true"> </td>
+	      <td ng-if="!profile.active" > <i class="fa fa-ban" aria-hidden="true"> </td>
+	      <td>
+	      	<a href="#/profile/edit/{{profile._id}}"> <i class="fa fa-pencil-square-o" aria-hidden="false"></i> </a>
+	      	<a ng-click="delete(profile._id)"> <i class="fa fa-trash-o" aria-hidden="false"></i> </a>
+	      	<a ng-if="profile.active" ng-click="inactive(profile._id)"> <i class="fa fa-ban" aria-hidden="true"></i> </a>
+	      	<a ng-if="!profile.active" ng-click="active(profile._id)"> <i class="fa fa-check" aria-hidden="true"></i> </a>
+	      </td>
+	    </tr>
+	  </tbody>
+  </table>
+
+  <a class="btn btn-primary" href="/#/profile/new">New Profile</a>
+</div>

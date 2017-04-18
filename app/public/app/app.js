@@ -54,6 +54,18 @@ Blogger.config(['$routeProvider', function ($routeProvider) {
     templateUrl:'app/tags/list.html',
     controller: 'tagsController'
   })
+  .when('/profiles',{
+    templateUrl:'app/profiles/list.html',
+    controller: 'profileController'
+  })
+  .when('/profile/new',{
+    templateUrl:'app/profiles/new.html',
+    controller: 'profileController'
+  })
+  .when('/profile/edit/:profileId',{
+    templateUrl:'app/profiles/edit.html',
+    controller: 'profileController'
+  })
   .otherwise({
 		redirectTo: '/login',
 	});

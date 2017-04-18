@@ -1,4 +1,4 @@
-BlogWebsite.service('httpService', function($http){
+Blogger.service('httpService', function($http){
 
 	this.get = function(route, data, cb){
 		// Validate parameters

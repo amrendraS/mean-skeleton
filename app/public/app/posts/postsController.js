@@ -13,7 +13,7 @@ Blogger.controller('postsController', ['$scope', 'httpService', '$rootScope', '$
     // Get all posts to display
     $scope.getPosts = function(){
       httpService.get("/posts", {}, function(res){
-        if(res.success) {
+        if(res.success && !!res.res.posts && res.res.posts.length > 0) {
           $scope.posts = res.res.posts;
           $scope.posts.reverse();
           // Get categories for these posts
@@ -109,7 +109,7 @@ Blogger.controller('postsController', ['$scope', 'httpService', '$rootScope', '$
         httpService.post("/posts/new", $scope.post, function(res){
           if(res.success) {
             $scope.posts = res.posts;
-            $location.path('/posts')
+            $location.path('/posts');
             $scope.getPosts ();
           } else {
             alert(res.info);
@@ -122,6 +122,7 @@ Blogger.controller('postsController', ['$scope', 'httpService', '$rootScope', '$
     $scope.edit = function(_id){
       httpService.post("/posts/edit/"+_id, $scope.post, function(res){
         if(res.success) {
+          $location.path('/posts');
           $scope.getPosts ();
         } else {
           alert(res.info);
@@ -137,6 +138,7 @@ Blogger.controller('postsController', ['$scope', 'httpService', '$rootScope', '$
       }
       httpService.post("/posts/delete/", {_id: _id}, function(res){
         if(res.success) {
+          $location.path('/posts');
           $scope.getPosts ();
         } else {
           alert(res.info);
@@ -148,6 +150,7 @@ Blogger.controller('postsController', ['$scope', 'httpService', '$rootScope', '$
     $scope.inactive = function(_id){
       httpService.post("/posts/inactive/", {_id: _id}, function(res){
         if(res.success) {
+          $location.path('/posts');
           $scope.getPosts ();
         } else {
           alert(res.info);
@@ -159,6 +162,7 @@ Blogger.controller('postsController', ['$scope', 'httpService', '$rootScope', '$
     $scope.active = function(_id){
       httpService.post("/posts/active/", {_id: _id}, function(res){
         if(res.success) {
+          $location.path('/posts');
           $scope.getPosts ();
         } else {
           alert(res.info);

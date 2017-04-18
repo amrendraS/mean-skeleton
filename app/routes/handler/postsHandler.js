@@ -67,7 +67,6 @@ postHandler.edit = function (req, res) {
 
 // Delete a post
 postHandler.delete = function (req, res) {
-	console.log(req.body)
 	if(!req.body._id) {
 		return res.json({success: false, info: "Unable to process delete request!"});
 	}
