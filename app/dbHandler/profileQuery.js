@@ -28,15 +28,14 @@ profileQuery.delete = function(query, cb){
 }
 
 profileQuery.inactive = function(query, cb){
-	data.updatedAt = new Date();
-	dbBridge.db.collection("profiles").update(query, {$set: {active: false}}, {multi: false}, function(err, res){
+	console.log('Profile inactive: ' + JSON.stringify(query));
+	dbBridge.db.collection("profiles").update(query, {$set: {active: false, updatedAt: new Date()}}, {multi: false}, function(err, res){
 		cb(err, res);
 	})
 }
 
 profileQuery.active = function(query, cb){
-	data.updatedAt = new Date();
-	dbBridge.db.collection("profiles").update(query, {$set: {active: true}}, {multi: false}, function(err, res){
+	dbBridge.db.collection("profiles").update(query, {$set: {active: true, updatedAt: new Date()}}, {multi: false}, function(err, res){
 		cb(err, res);
 	})
 }

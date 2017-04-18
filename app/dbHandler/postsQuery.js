@@ -28,15 +28,13 @@ postsQuery.delete = function(query, cb){
 }
 
 postsQuery.inactive = function(query, cb){
-	data.updatedAt = new Date();
-	dbBridge.db.collection("posts").update(query, {$set: {active: false}}, {multi: false}, function(err, res){
+	dbBridge.db.collection("posts").update(query, {$set: {active: false, updatedAt: new Date()}}, {multi: false}, function(err, res){
 		cb(err, res);
 	})
 }
 
 postsQuery.active = function(query, cb){
-	data.updatedAt = new Date();
-	dbBridge.db.collection("posts").update(query, {$set: {active: true}}, {multi: false}, function(err, res){
+	dbBridge.db.collection("posts").update(query, {$set: {active: true, updatedAt: new Date()}}, {multi: false}, function(err, res){
 		cb(err, res);
 	})
 }

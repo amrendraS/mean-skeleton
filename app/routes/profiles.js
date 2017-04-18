@@ -24,7 +24,7 @@ router.post('/delete', function(req, res, next) {
 
 // Inactive a profile API
 router.post('/inactive', function(req, res, next) {
-	console.log(JSON.stringify(req))
+	// console.log(JSON.stringify(req))
 	profileHandler.inactive(req, res);
 });
 
